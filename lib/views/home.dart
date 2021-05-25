@@ -55,6 +55,7 @@ class _HomeState extends State<Home> {
             child: Container(
               child: Column(
                 children: <Widget>[
+                  Test(),
                   Container(
                     decoration: BoxDecoration(
                         color: Color(0xfff5f8fd),
