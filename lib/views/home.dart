@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wallpaper_newapp/views/categorie.dart';
+import 'package:wallpaper_newapp/views/test.dart';
 import 'package:wallpaper_newapp/widgets/widget.dart';
 import 'package:wallpaper_newapp/model/categories_model.dart';
 import 'package:wallpaper_newapp/data/data.dart';
@@ -49,65 +50,68 @@ class _HomeState extends State<Home> {
           title: brandName(),
           elevation: 0.0,
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                      color: Color(0xfff5f8fd),
-                      borderRadius: BorderRadius.circular(32)),
-                  padding: EdgeInsets.symmetric(horizontal: 24),
-                  margin: EdgeInsets.symmetric(horizontal: 24),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextField(
-                          controller: searchController,
-                          decoration: InputDecoration(
-                              hintText: "search wallpaper",
-                              border: InputBorder.none),
+        body: Container(
+          child: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Color(0xfff5f8fd),
+                        borderRadius: BorderRadius.circular(32)),
+                    padding: EdgeInsets.symmetric(horizontal: 24),
+                    margin: EdgeInsets.symmetric(horizontal: 24),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextField(
+                            controller: searchController,
+                            decoration: InputDecoration(
+                                hintText: "search wallpaper",
+                                border: InputBorder.none),
+                          ),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Search(
-                                        searchQuery: searchController.text,
-                                      )));
-                        },
-                        child: Container(child: Icon(Icons.search)),
-                      )
-                    ],
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Search(
+                                          searchQuery: searchController.text,
+                                        )));
+                          },
+                          child: Container(child: Icon(Icons.search)),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  height: 40,
-                  child: ListView.builder(
-                      padding: EdgeInsets.symmetric(horizontal: 24),
-                      itemCount: categories.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return CategoriesTile(
-                          title: categories[index].categoriesName,
-                          imgUrl: categories[index].imgUrl,
-                        );
-                      }),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                wallpapersList(wallpapers: wallpapers, context: context)
-              ],
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    height: 40,
+                    child: ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 24),
+                        itemCount: categories.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return CategoriesTile(
+                            title: categories[index].categoriesName,
+                            imgUrl: categories[index].imgUrl,
+                          );
+                        }),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  wallpapersList(wallpapers: wallpapers, context: context),
+                ],
+              ),
             ),
           ),
-        ));
+        ),
+    );
   }
 }
 
