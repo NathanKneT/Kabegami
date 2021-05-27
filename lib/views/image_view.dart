@@ -33,6 +33,21 @@ class _ImageViewState extends State<ImageView> {
                   fit: BoxFit.cover,
                 )),
           ),
+          GestureDetector(
+            onVerticalDragEnd: (endDetails) {
+              double velocity = endDetails.primaryVelocity;
+              if (velocity < 0) {
+                _detailsModal(context);
+              } else {
+                Navigator.pop(context);
+              };
+            },
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            alignment: Alignment.topLeft,
+          ),
           Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
@@ -90,10 +105,10 @@ class _ImageViewState extends State<ImageView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      _detailsModal(context);
                     },
                     child: Text(
-                      "Cancel",
+                      "Details",
                       style: TextStyle(
                         color: Colors.white,
                         shadows: [
@@ -150,3 +165,87 @@ class _ImageViewState extends State<ImageView> {
     }
   }
 }
+
+void _detailsModal(context) {
+  final int likeCount = 999;
+  final GlobalKey<LikeButtonState> _globalKey = GlobalKey<LikeButtonState>();
+  final double buttonSize = 40.0;
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return Container(
+          height: MediaQuery.of(context).size.height * .60,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.portrait,
+                        size: buttonSize,),
+                    ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.file_download,
+                        size: buttonSize,),
+                    ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.label,
+                        size: buttonSize,),
+                    ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.flag,
+                        size: buttonSize,),
+                    ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      LikeButton(
+                        size: buttonSize,
+                        likeCount: likeCount,
+                        key: _globalKey,
+                        countBuilder: (int count, bool isLiked, String text) {
+                          final ColorSwatch<int> color =
+                              isLiked ? Colors.pinkAccent : Colors.grey;
+                          Widget result;
+                          if (count == 0) {
+                            result = Text(
+                              'love',
+                              style: TextStyle(color: color),
+                            );
+                          } else
+                            result = Text(
+                              count >= 1000
+                                  ? (count / 1000.0).toStringAsFixed(1) + 'k'
+                                  : text,
+                              style: TextStyle(color: color),
+                            );
+                          return result;
+                        },
+                        likeCountAnimationType: likeCount < 1000
+                            ? LikeCountAnimationType.part
+                            : LikeCountAnimationType.none,
+                        likeCountPadding: const EdgeInsets.only(left: 15.0),
+                      ),
+                    ]),
+              ],
+            ),
+          ),
+        );
+      });
+}
+
+/*
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    ),
+ */
