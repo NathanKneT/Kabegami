@@ -1,41 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:wallpaper_newapp/views/home.dart';
+import 'package:wallpaper_newapp/views/new.dart';
+import 'package:wallpaper_newapp/views/top.dart';
 
-class Test extends StatefulWidget {
+class Nav extends StatefulWidget {
   @override
-  _TestState createState() => _TestState();
+  _NavState createState() => _NavState();
 }
-class _TestState extends State<Test> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'home.dart',
-      style: optionStyle,
-    ),
-    Text(
-      'home.dart fetch popular wallpaper',
-      style: optionStyle,
-    ),
-    Text(
-      'home.dart fetch new wallpaper',
-      style: optionStyle,
-    ),
-  ];
 
-  void _onItemTapped(int index) {
+class _NavState extends State<Nav> {
+  int _selectedIndex = 0;
+  List<Widget> _widgetOptions = <Widget>[Home(), Top(), New()];
+
+  void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        title: const Text('La putain de bottombar'),
-      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
-      ),*/
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -52,12 +40,8 @@ class _TestState extends State<Test> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
+        onTap: _onItemTap,
       ),
     );
   }
-
-  }
-
-
+}

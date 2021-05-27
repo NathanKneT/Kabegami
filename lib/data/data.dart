@@ -25,19 +25,19 @@ List<CategoriesModel> getCategories() {
   categoriesModel = new CategoriesModel();
 
   categoriesModel.imgUrl =
-  "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280";
+      "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280";
   categoriesModel.categoriesName = "Coding";
   categories.add(categoriesModel);
   categoriesModel = new CategoriesModel();
 
   categoriesModel.imgUrl =
-  "https://images.pexels.com/photos/5698363/pexels-photo-5698363.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280";
+      "https://images.pexels.com/photos/5698363/pexels-photo-5698363.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280";
   categoriesModel.categoriesName = "Gaming";
   categories.add(categoriesModel);
   categoriesModel = new CategoriesModel();
 
   categoriesModel.imgUrl =
-  "https://images.pexels.com/photos/92870/pexels-photo-92870.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280";
+      "https://images.pexels.com/photos/92870/pexels-photo-92870.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280";
   categoriesModel.categoriesName = "Chill";
   categories.add(categoriesModel);
   categoriesModel = new CategoriesModel();

@@ -1,28 +1,23 @@
 import 'dart:convert';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:wallpaper_newapp/widgets/widget.dart';
 import 'package:wallpaper_newapp/data/data.dart';
 import 'package:wallpaper_newapp/model/wallpaper_model.dart';
-import 'package:wallpaper_newapp/widgets/widget.dart';
-import "package:wallpaper_newapp/widgets/string_extension.dart";
+import 'package:http/http.dart' as http;
 
-class Categorie extends StatefulWidget {
-  final String categorieName;
-
-  Categorie({this.categorieName});
-
+class New extends StatefulWidget {
   @override
-  _CategorieState createState() => _CategorieState();
+  _NewState createState() => _NewState();
 }
 
-class _CategorieState extends State<Categorie> {
+class _NewState extends State<New> {
   List<WallpaperModel> wallpapers = new List();
+  TextEditingController searchController = new TextEditingController();
 
-  getSearchWallpapers(String query) async {
+  getNewWallpapers() async {
     var response = await http.get(
-        Uri.parse(
-            "https://api.pexels.com/v1/search?query=$query&per_page=15&page=1"),
+        Uri.parse("https://api.pexels.com/v1/curated?per_page=15&page=3"),
         headers: {"Authorization": apiKey});
 
     Map<String, dynamic> jsonData = jsonDecode(response.body);
@@ -37,29 +32,32 @@ class _CategorieState extends State<Categorie> {
 
   @override
   void initState() {
-    getSearchWallpapers(widget.categorieName);
+    getNewWallpapers();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var title = widget.categorieName.capitalize();
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-          elevation: 0.0,
-        ),
-        body: SingleChildScrollView(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text('New'),
+        elevation: 0.0,
+      ),
+      body: Container(
+        child: SingleChildScrollView(
           child: Container(
             child: Column(
               children: <Widget>[
                 SizedBox(
                   height: 16,
                 ),
-                wallpapersList(wallpapers: wallpapers, context: context)
+                wallpapersList(wallpapers: wallpapers, context: context),
               ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
