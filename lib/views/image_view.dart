@@ -185,24 +185,31 @@ void _detailsModal(context) {
                     children: <Widget>[
                       Icon(Icons.portrait,
                         size: buttonSize,),
+                        Text("John DOE"),
                     ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Icon(Icons.file_download,
                         size: buttonSize,),
+                        Text("1452"),
                     ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Icon(Icons.label,
                         size: buttonSize,),
+                      Text("Tag1"),
+                      Text("Tag2"),
+                      Text("Tag3"),
+                      Text("Tag4"),
                     ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Icon(Icons.flag,
                         size: buttonSize,),
+                        Text("Report"),
                     ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
