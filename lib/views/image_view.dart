@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:like_button/like_button.dart';
+import 'package:wallpaper_newapp/views/report.dart';
 
 class ImageView extends StatefulWidget {
   final String imgUrl;
@@ -270,10 +271,45 @@ void _detailsModal(context) {
       });
 }
 
-/*
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    ),
- */
+class ReportTile extends StatelessWidget {
+  final String title;
+
+  ReportTile({@required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Report(
+                  wallpaper: title.toLowerCase(),
+                )));
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 4),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              height: 50,
+              width: 100,
+              alignment: Alignment.center,
+              child: Text(
+                title,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
