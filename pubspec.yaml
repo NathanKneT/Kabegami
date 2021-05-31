@@ -30,7 +30,8 @@ dependencies:
   dio: ^4.0.0
   cached_network_image: ^3.0.0
   like_button: ^2.0.2
-  persistent_bottom_nav_bar: ^4.0.2
+  flutter_tags: "^0.4.9+1"
+  #persistent_bottom_nav_bar: ^4.0.2
 
 
   # The following adds the Cupertino Icons font to your application.

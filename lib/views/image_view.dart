@@ -166,6 +166,22 @@ class _ImageViewState extends State<ImageView> {
   }
 }
 
+Widget _buildChip(String label) {
+  return Chip(
+    labelPadding: EdgeInsets.all(2.0),
+    label: Text(
+      label,
+      style: TextStyle(
+        color: Colors.white,
+      ),
+    ),
+    backgroundColor: Color(0xff848989),
+    elevation: 6.0,
+    shadowColor: Colors.grey[60],
+    padding: EdgeInsets.all(8.0),
+  );
+}
+
 void _detailsModal(context) {
   final int likeCount = 999;
   final GlobalKey<LikeButtonState> _globalKey = GlobalKey<LikeButtonState>();
@@ -174,11 +190,12 @@ void _detailsModal(context) {
       context: context,
       builder: (BuildContext bc) {
         return Container(
-          height: MediaQuery.of(context).size.height * .60,
+          height: MediaQuery.of(context).size.height * .30,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -199,11 +216,15 @@ void _detailsModal(context) {
                     children: <Widget>[
                       Icon(Icons.label,
                         size: buttonSize,),
-                      Text("Tag1"),
-                      Text("Tag2"),
-                      Text("Tag3"),
-                      Text("Tag4"),
-                    ]),
+                         Wrap(
+                        spacing: 6.0,
+                        runSpacing: 6.0,
+                        children: <Widget>[
+                          _buildChip('Doge'),
+                          _buildChip('To'),
+                          _buildChip('The Moon'),
+                        ],
+                        ),]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -220,7 +241,7 @@ void _detailsModal(context) {
                         key: _globalKey,
                         countBuilder: (int count, bool isLiked, String text) {
                           final ColorSwatch<int> color =
-                              isLiked ? Colors.pinkAccent : Colors.grey;
+                              isLiked ? Colors.red : Colors.grey;
                           Widget result;
                           if (count == 0) {
                             result = Text(
