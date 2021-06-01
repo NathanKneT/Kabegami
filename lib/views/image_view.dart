@@ -25,7 +25,7 @@ class _ImageViewState extends State<ImageView> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-          color: Colors.blue,
+          color: Colors.transparent,
           child: CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
@@ -40,9 +40,6 @@ class _ImageViewState extends State<ImageView> {
                   ),
                 ),
           ),
-                 SliverPadding(
-                   padding: EdgeInsets.only(top: _appBarBottomBtnPosition),
-                 ),
                 SliverFixedExtentList(
                   itemExtent: 400.00, delegate: SliverChildListDelegate([
                 detailsModal(context)
@@ -55,8 +52,6 @@ class _ImageViewState extends State<ImageView> {
 
   Widget buttonDownload(context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
       alignment: Alignment.bottomCenter,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -107,7 +102,7 @@ class _ImageViewState extends State<ImageView> {
             ),
           ),
           SizedBox(
-            height: 16,
+            height: 15,
           ),
         ],
       ),
@@ -137,7 +132,6 @@ Widget detailsModal(context) {
         return Container(
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
-              color: Color(0xffd2cccc).withOpacity(1),
               gradient: LinearGradient(colors: [
                   Color(0x36FFFFFF),
               Color(0xE111111) ],),
