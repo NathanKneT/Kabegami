@@ -23,22 +23,7 @@ class _ImageViewState extends State<ImageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: CustomScrollView(
-          slivers: <Widget> [
-            SliverAppBar(
-              expandedHeight:  MediaQuery.of(context).size.height,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Image.network(
-                  widget.imgUrl,
-                  fit: BoxFit.cover,
-                ),
-              ),
-
-            )
-          ],
-
-/*        child: Column(
+      body: Stack(
         children: <Widget>[
           Hero(
             tag: widget.imgUrl,
@@ -90,10 +75,10 @@ class _ImageViewState extends State<ImageView> {
                           height: 50,
                           width: MediaQuery.of(context).size.width / 2,
                           padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                          EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                           decoration: BoxDecoration(
                               border:
-                                  Border.all(color: Colors.white54, width: 1),
+                              Border.all(color: Colors.white54, width: 1),
                               borderRadius: BorderRadius.circular(30),
                               gradient: LinearGradient(colors: [
                                 Color(0x36FFFFFF),
@@ -130,19 +115,19 @@ class _ImageViewState extends State<ImageView> {
                         color: Colors.white,
                         shadows: [
                           Shadow(
-                              // bottomLeft
+                            // bottomLeft
                               offset: Offset(-1, -1),
                               color: Colors.black87),
                           Shadow(
-                              // bottomRight
+                            // bottomRight
                               offset: Offset(1, -1),
                               color: Colors.black87),
                           Shadow(
-                              // topRight
+                            // topRight
                               offset: Offset(1, 1),
                               color: Colors.black87),
                           Shadow(
-                              // topLeft
+                            // topLeft
                               offset: Offset(-1, 1),
                               color: Colors.black87),
                         ],
@@ -155,8 +140,6 @@ class _ImageViewState extends State<ImageView> {
                 ],
               ))
         ],
-        ),
- */     ),
       ),
     );
   }
@@ -168,7 +151,7 @@ class _ImageViewState extends State<ImageView> {
     var response = await Dio()
         .get(widget.imgUrl, options: Options(responseType: ResponseType.bytes));
     final result =
-        await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
+    await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
     print(result);
     Navigator.pop(context);
   }
@@ -176,8 +159,8 @@ class _ImageViewState extends State<ImageView> {
   _askPermission() async {
     if (Platform.isIOS) {
       Map<PermissionGroup, PermissionStatus> permissions =
-          await PermissionHandler()
-              .requestPermissions([PermissionGroup.photos]);
+      await PermissionHandler()
+          .requestPermissions([PermissionGroup.photos]);
     } else {
       PermissionStatus permission = await PermissionHandler()
           .checkPermissionStatus(PermissionGroup.storage);
@@ -211,11 +194,11 @@ void _detailsModal(context) {
         return Container(
           height: MediaQuery.of(context).size.height * .30,
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50),
-              topRight: Radius.circular(50),
-            )
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50),
+                topRight: Radius.circular(50),
+              )
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -228,21 +211,21 @@ void _detailsModal(context) {
                     children: <Widget>[
                       Icon(Icons.portrait,
                         size: buttonSize,),
-                        Text("John DOE"),
+                      Text("John DOE"),
                     ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Icon(Icons.file_download,
                         size: buttonSize,),
-                        Text("1452"),
+                      Text("1452"),
                     ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Icon(Icons.label,
                         size: buttonSize,),
-                         Wrap(
+                      Wrap(
                         spacing: 6.0,
                         runSpacing: 6.0,
                         children: <Widget>[
@@ -250,13 +233,13 @@ void _detailsModal(context) {
                           _buildChip('To'),
                           _buildChip('The Moon'),
                         ],
-                        ),]),
+                      ),]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Icon(Icons.flag,
                         size: buttonSize,),
-                        Text("Report"),
+                      Text("Report"),
                     ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -267,7 +250,7 @@ void _detailsModal(context) {
                         key: _globalKey,
                         countBuilder: (int count, bool isLiked, String text) {
                           final ColorSwatch<int> color =
-                              isLiked ? Colors.red : Colors.grey;
+                          isLiked ? Colors.red : Colors.grey;
                           Widget result;
                           if (count == 0) {
                             result = Text(
