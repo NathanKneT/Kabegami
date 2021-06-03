@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallpaper_newapp/views/image_view.dart';
 import 'package:wallpaper_newapp/widgets/nav.dart';
 
 void main() {
