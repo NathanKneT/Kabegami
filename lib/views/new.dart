@@ -39,7 +39,6 @@ class _NewState extends State<New> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('New'),
         elevation: 0.0,

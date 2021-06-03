@@ -2,29 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:wallpaper_newapp/model/wallpaper_model.dart';
 import 'package:wallpaper_newapp/views/image_view.dart';
 
-Widget brandNameSearch() {
+Widget brandNameSearch(BuildContext context) {
   return RichText(
     text : TextSpan(
       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
     children: <TextSpan>[
-      TextSpan(text: "Kabe",  style: TextStyle(color: Colors.black87)),
-      TextSpan(text: "Gami",  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
+      TextSpan(text: "Kabe",  style: TextStyle(color: Theme.of(context).primaryColorDark)),
+      TextSpan(text: "Gami",  style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).accentColor)),
     ],
   ),
   );
 }
 
-Widget brandName() {
+Widget brandName(BuildContext context) {
   return Center(
     child: RichText(
       text: TextSpan(
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-        children: const <TextSpan>[
-          TextSpan(text: 'Kabe', style: TextStyle(color: Colors.black87)),
-          TextSpan(
-              text: 'gami',
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
+        children: <TextSpan>[
+          TextSpan(text: "Kabe",  style: TextStyle(color: Theme.of(context).primaryColorDark)),
+          TextSpan(text: "Gami",  style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).accentColor)),// Constante problème
         ],
       ),
     ),

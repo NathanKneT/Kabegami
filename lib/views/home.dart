@@ -44,9 +44,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: brandName(),
+        title: brandName(context),
         elevation: 0.0,
       ),
       body: Container(
@@ -56,7 +55,7 @@ class _HomeState extends State<Home> {
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
-                      color: Color(0xfff5f8fd),
+                      color: Theme.of(context).dividerColor,
                       borderRadius: BorderRadius.circular(32)),
                   padding: EdgeInsets.symmetric(horizontal: 24),
                   margin: EdgeInsets.symmetric(horizontal: 24),

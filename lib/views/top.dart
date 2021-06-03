@@ -39,7 +39,6 @@ class _TopState extends State<Top> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Top'),
         elevation: 0.0,

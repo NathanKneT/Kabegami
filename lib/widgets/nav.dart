@@ -26,7 +26,7 @@ class _NavState extends State<Nav> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).primaryColor,
 
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

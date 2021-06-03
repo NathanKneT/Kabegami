@@ -46,7 +46,7 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: brandNameSearch(),
+        title: brandNameSearch(context),
         elevation: 0.0,
       ),
       body: SingleChildScrollView(
@@ -55,7 +55,7 @@ class _SearchState extends State<Search> {
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                    color: Color(0xfff5f8fd),
+                    color: Theme.of(context).dividerColor,
                     borderRadius: BorderRadius.circular(32)),
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 margin: EdgeInsets.symmetric(horizontal: 24),
