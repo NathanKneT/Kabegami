@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Kabegami',
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
           primaryColorBrightness: Brightness.light,
           brightness: Brightness.light,
@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.blue,
           dividerColor: Color(0xfff5f8fd),
           primaryColorDark: Colors.black87,
+          indicatorColor: Colors.white,
           canvasColor: Colors.transparent,
           appBarTheme: AppBarTheme(brightness: Brightness.light)),
       darkTheme: ThemeData(
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           dividerColor: Color(0xff464646),
           brightness: Brightness.dark,
           primaryColorDark: Colors.white,
-          indicatorColor: Colors.grey,
+          indicatorColor: Color(0xff1d1d1d),
           canvasColor: Colors.black,
           appBarTheme: AppBarTheme(brightness: Brightness.dark) ),
       home: Nav(),

@@ -27,8 +27,8 @@ class _ImageViewState extends State<ImageView> {
         slivers: <Widget>[
           SliverAppBar(
             bottom: PreferredSize(
-              child: Container(),
-              preferredSize: Size(0, 20),
+              child: buttonDownload(context),
+              preferredSize: Size(100, 10),
             ),
             pinned: false,
             expandedHeight: MediaQuery.of(context).size.height,
@@ -161,9 +161,6 @@ Widget buttonDownload(context) {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-              buttonDownload(context),
-            ]),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
               Icon(
                 Icons.portrait,
