@@ -38,74 +38,76 @@ class _ImageViewState extends State<ImageView> {
           bool isChecked = false;
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
-              content: Container(
-                  width: 400.0,
-                  height: 300.0,
-                  key: _formKey,
-                  child: Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Theme.of(context).dividerColor,
-                                borderRadius: BorderRadius.circular(32)),
-                            padding: EdgeInsets.symmetric(horizontal: 24),
-                            child: Row(children: <Widget>[
-                              Flexible(
-                                child: TextFormField(
-                                  controller: _textMail,
-                                  validator: (value) {
-                                    return value.isValidEmail()
-                                        ? null
-                                        : "Invalid Field";
-                                  },
-                                  decoration: InputDecoration(
-                                      hintText: "Mail",
-                                      border: InputBorder.none),
+              content: SizedBox(
+                      width: 400.0,
+                      height: 300.0,
+                      child: Form(
+                        key: _formKey,
+                        child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).dividerColor,
+                                  borderRadius: BorderRadius.circular(32)),
+                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              child: Row(children: <Widget>[
+                                Flexible(
+                                  child: TextFormField(
+                                    controller: _textMail,
+                                    validator: (value) {
+                                      return value.isValidEmail()
+                                          ? null
+                                          : "Invalid Field";
+                                    },
+                                    decoration: InputDecoration(
+                                        hintText: "Mail",
+                                        border: InputBorder.none),
+                                  ),
                                 ),
-                              ),
-                            ]),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Theme.of(context).dividerColor,
-                                borderRadius: BorderRadius.circular(32)),
-                            padding: EdgeInsets.symmetric(horizontal: 24),
-                            height: 120.0,
-                            child: Row(children: <Widget>[
-                              Flexible(
-                                child: TextFormField(
-                                  controller: _textEditingController,
-                                  validator: (value) {
-                                    return value.isNotEmpty
-                                        ? null
-                                        : "Invalid Field";
-                                  },
-                                  decoration: InputDecoration(
-                                      hintText: "Message",
-                                      border: InputBorder.none),
+                              ]),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).dividerColor,
+                                  borderRadius: BorderRadius.circular(32)),
+                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              height: 120.0,
+                              child: Row(children: <Widget>[
+                                Flexible(
+                                  child: TextFormField(
+                                    controller: _textEditingController,
+                                    validator: (value) {
+                                      return value.isNotEmpty
+                                          ? null
+                                          : "Invalid Field";
+                                    },
+                                    decoration: InputDecoration(
+                                        hintText: "Message",
+                                        border: InputBorder.none),
+                                  ),
                                 ),
-                              ),
-                            ]),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("I'm the artist"),
-                              Checkbox(
-                                  value: isChecked,
-                                  onChanged: (checked) {
-                                    setState(() {
-                                      isChecked = checked;
-                                    });
-                                  })
-                            ],
-                          )
-                        ],
-                      ))),
+                              ]),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("I'm the artist"),
+                                Checkbox(
+                                    value: isChecked,
+                                    onChanged: (checked) {
+                                      setState(() {
+                                        isChecked = checked;
+                                      });
+                                    })
+                              ],
+                            )
+                          ],
+                        ))),
+                    ),
               actions: <Widget>[
                 TextButton(
                   child: Text('Send'),
