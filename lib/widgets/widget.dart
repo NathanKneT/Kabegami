@@ -1,8 +1,14 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:wallpaper_newapp/model/wallpaper_model.dart';
 import 'package:wallpaper_newapp/views/image_view.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 Widget brandNameSearch(BuildContext context) {
   return RichText(
@@ -45,7 +51,9 @@ Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
           menuWidth: MediaQuery.of(context).size.width*0.5,
           onPressed: (){},
           menuItems:<FocusedMenuItem>[
-            FocusedMenuItem(title: Text("Download"), onPressed:(){},trailingIcon: Icon(Icons.download),backgroundColor: Theme.of(context).indicatorColor, ),
+            FocusedMenuItem(title: Text("Download"), onPressed:() {
+             // _save();
+            },trailingIcon: Icon(Icons.download),backgroundColor: Theme.of(context).indicatorColor, ),
             FocusedMenuItem(title: Text("Like"), onPressed:(){},trailingIcon: Icon(Icons.favorite),backgroundColor: Theme.of(context).indicatorColor, ),
             FocusedMenuItem(title: Text("Share"), onPressed:(){},trailingIcon: Icon(Icons.share),backgroundColor:Theme.of(context).indicatorColor, ),
           ],
@@ -77,3 +85,27 @@ Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
     ),
   );
 }
+/*
+_save() async {
+  if (Platform.isAndroid) {
+    await _askPermission();
+  }
+  var response = await Dio()
+      .get(wallpapersList.imgUrl, options: Options(responseType: ResponseType.bytes)); //En gros là faut que je link l'url de l'image
+  final result =
+  await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
+  print(result);
+  Navigator.pop(context);
+}
+
+_askPermission() async {
+  if (Platform.isIOS) {
+    Map<PermissionGroup, PermissionStatus> permissions =
+    await PermissionHandler()
+        .requestPermissions([PermissionGroup.photos]);
+  } else {
+    PermissionStatus permission = await PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.storage);
+  }
+}
+*/
