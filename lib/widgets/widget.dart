@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 import 'package:wallpaper_newapp/model/wallpaper_model.dart';
 import 'package:wallpaper_newapp/views/image_view.dart';
 
@@ -39,25 +41,34 @@ Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
       mainAxisSpacing: 6.0,
       crossAxisSpacing: 6.0,
       children: wallpapers.map((wallpaper) {
-        return GridTile(
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ImageView(
-                            imgUrl: wallpaper.src.portrait,
-                          )));
-            },
-            child: Hero(
-              tag: wallpaper.src.portrait,
-              child: Container(
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.network(
-                      wallpaper.src.portrait,
-                      fit: BoxFit.cover,
-                    )),
+        return FocusedMenuHolder(
+          menuWidth: MediaQuery.of(context).size.width*0.5,
+          onPressed: (){},
+          menuItems:<FocusedMenuItem>[
+            FocusedMenuItem(title: Text("Download"), onPressed:(){},trailingIcon: Icon(Icons.download),backgroundColor: Theme.of(context).indicatorColor, ),
+            FocusedMenuItem(title: Text("Like"), onPressed:(){},trailingIcon: Icon(Icons.favorite),backgroundColor: Theme.of(context).indicatorColor, ),
+            FocusedMenuItem(title: Text("Share"), onPressed:(){},trailingIcon: Icon(Icons.share),backgroundColor:Theme.of(context).indicatorColor, ),
+          ],
+          child: GridTile(
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ImageView(
+                              imgUrl: wallpaper.src.portrait,
+                            )));
+              },
+              child: Hero(
+                tag: wallpaper.src.portrait,
+                child: Container(
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.network(
+                        wallpaper.src.portrait,
+                        fit: BoxFit.cover,
+                      )),
+                ),
               ),
             ),
           ),
