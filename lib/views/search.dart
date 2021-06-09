@@ -51,6 +51,7 @@ class _SearchState extends State<Search> {
       ),
       body: SingleChildScrollView(
         child: Container(
+          color: Theme.of(context).indicatorColor,
           child: Column(
             children: <Widget>[
               Container(

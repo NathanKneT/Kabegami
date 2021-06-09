@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
@@ -9,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:wallpaper_newapp/model/wallpaper_model.dart';
 import 'package:wallpaper_newapp/views/image_view.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:share/share.dart';
 
 Widget brandNameSearch(BuildContext context) {
   return RichText(
@@ -52,10 +52,9 @@ Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
           onPressed: (){},
           menuItems:<FocusedMenuItem>[
             FocusedMenuItem(title: Text("Download"), onPressed:() {
-             // _save();
+              _save(wallpaper.src.portrait);
             },trailingIcon: Icon(Icons.download),backgroundColor: Theme.of(context).indicatorColor, ),
-            FocusedMenuItem(title: Text("Like"), onPressed:(){},trailingIcon: Icon(Icons.favorite),backgroundColor: Theme.of(context).indicatorColor, ),
-            FocusedMenuItem(title: Text("Share"), onPressed:(){},trailingIcon: Icon(Icons.share),backgroundColor:Theme.of(context).indicatorColor, ),
+            FocusedMenuItem(title: Text("Share"), onPressed:(){Share.share(wallpaper.src.portrait);},trailingIcon: Icon(Icons.share),backgroundColor:Theme.of(context).indicatorColor, ),
           ],
           child: GridTile(
             child: GestureDetector(
@@ -85,17 +84,16 @@ Widget wallpapersList({List<WallpaperModel> wallpapers, context}) {
     ),
   );
 }
-/*
-_save() async {
+
+_save(String) async {
   if (Platform.isAndroid) {
     await _askPermission();
   }
   var response = await Dio()
-      .get(wallpapersList.imgUrl, options: Options(responseType: ResponseType.bytes)); //En gros là faut que je link l'url de l'image
+      .get(String, options: Options(responseType: ResponseType.bytes));
   final result =
   await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
   print(result);
-  Navigator.pop(context);
 }
 
 _askPermission() async {
@@ -108,4 +106,3 @@ _askPermission() async {
         .checkPermissionStatus(PermissionGroup.storage);
   }
 }
-*/

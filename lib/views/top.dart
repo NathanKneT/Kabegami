@@ -44,6 +44,7 @@ class _TopState extends State<Top> {
         elevation: 0.0,
       ),
       body: Container(
+        color: Theme.of(context).indicatorColor,
         child: SingleChildScrollView(
           child: Container(
             child: Column(

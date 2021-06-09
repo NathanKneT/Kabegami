@@ -44,6 +44,7 @@ class _NewState extends State<New> {
         elevation: 0.0,
       ),
       body: Container(
+        color: Theme.of(context).indicatorColor,
         child: SingleChildScrollView(
           child: Container(
             child: Column(

@@ -133,11 +133,7 @@ class _ImageViewState extends State<ImageView> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            bottom: PreferredSize(
-              child: buttonDownload(context),
-              preferredSize: Size(100, 10),
-            ),
-            pinned: false,
+            pinned: true,
             expandedHeight: MediaQuery.of(context).size.height,
             flexibleSpace: Stack(
               children: [
@@ -154,7 +150,7 @@ class _ImageViewState extends State<ImageView> {
                     bottom: 0),
                 Positioned(
                   child: Container(
-                    height: 30,
+                    height: 100,
                     decoration: BoxDecoration(
                       color: Theme.of(context).dividerColor,
                       borderRadius: BorderRadius.vertical(
@@ -163,6 +159,12 @@ class _ImageViewState extends State<ImageView> {
                     ),
                   ),
                   bottom: -1,
+                  left: 0,
+                  right: 0,
+                ),
+                Positioned(
+                  child: buttonDownload(context),
+                  bottom: 23,
                   left: 0,
                   right: 0,
                 ),
@@ -233,6 +235,17 @@ class _ImageViewState extends State<ImageView> {
     );
   }
 
+  _askPermission() async {
+    if (Platform.isIOS) {
+      Map<PermissionGroup, PermissionStatus> permissions =
+      await PermissionHandler()
+          .requestPermissions([PermissionGroup.photos]);
+    } else {
+      PermissionStatus permission = await PermissionHandler()
+          .checkPermissionStatus(PermissionGroup.storage);
+    }
+  }
+
   _save() async {
     if (Platform.isAndroid) {
       await _askPermission();
@@ -243,17 +256,6 @@ class _ImageViewState extends State<ImageView> {
         await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
     print(result);
     Navigator.pop(context);
-  }
-
-  _askPermission() async {
-    if (Platform.isIOS) {
-      Map<PermissionGroup, PermissionStatus> permissions =
-          await PermissionHandler()
-              .requestPermissions([PermissionGroup.photos]);
-    } else {
-      PermissionStatus permission = await PermissionHandler()
-          .checkPermissionStatus(PermissionGroup.storage);
-    }
   }
 
   Widget detailsModal(context) {
