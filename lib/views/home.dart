@@ -59,14 +59,14 @@ class _HomeState extends State<Home> {
                       color: Theme.of(context).dividerColor,
                       borderRadius: BorderRadius.circular(32)),
                   padding: EdgeInsets.symmetric(horizontal: 24),
-                  margin: EdgeInsets.symmetric(horizontal: 24),
+                  margin: EdgeInsets.only(left: 24, right: 24, top: 24, bottom: 10),
                   child: Row(
                     children: <Widget>[
                       Expanded(
                         child: TextField(
                           controller: searchController,
                           decoration: InputDecoration(
-                              hintText: "search wallpaper",
+                              hintText: "Search Wallpaper",
                               border: InputBorder.none),
                         ),
                       ),
@@ -101,10 +101,15 @@ class _HomeState extends State<Home> {
                         );
                       }),
                 ),
+                // margin top
                 SizedBox(
                   height: 16,
                 ),
                 wallpapersList(wallpapers: wallpapers, context: context),
+                // margin bottom
+                SizedBox(
+                  height: 16,
+                )
               ],
             ),
           ),
