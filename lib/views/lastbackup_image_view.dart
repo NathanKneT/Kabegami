@@ -3,14 +3,12 @@ import 'dart:typed_data';
 import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:like_button/like_button.dart';
 
 class ImageView extends StatefulWidget {
   final String imgUrl;
-
 
   ImageView({@required this.imgUrl});
 
@@ -21,7 +19,7 @@ class ImageView extends StatefulWidget {
 extension EmailValidator on String {
   bool isValidEmail() {
     return RegExp(
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
         .hasMatch(this);
   }
 }
@@ -29,29 +27,25 @@ extension EmailValidator on String {
 class _ImageViewState extends State<ImageView> {
   var filePath;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final int likeCount = 999;
-  final GlobalKey<LikeButtonState> _globalKey = GlobalKey<LikeButtonState>();
-  final double buttonSize = 40.0;
-  final double smallbuttonSize = 30.0;
 
-  Future<void> showInformationDialog(BuildContext context) async { //C'est la pop-up de report
+  Future<void> showInformationDialog(BuildContext context) async {
     return await showDialog(
         context: context,
         builder: (context) {
           final TextEditingController _textMail = TextEditingController();
           final TextEditingController _textEditingController =
-          TextEditingController();
+              TextEditingController();
           bool isChecked = false;
           return StatefulBuilder(builder: (context, setState) {
             return BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 12,sigmaY: 12),
               child: AlertDialog(
                 content: SizedBox(
-                  width: 400.0,
-                  height: 300.0,
-                  child: Form(
-                      key: _formKey,
-                      child: Padding(
+                        width: 400.0,
+                        height: 300.0,
+                        child: Form(
+                          key: _formKey,
+                          child: Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -115,7 +109,7 @@ class _ImageViewState extends State<ImageView> {
                               )
                             ],
                           ))),
-                ),
+                      ),
                 actions: <Widget>[
                   TextButton(
                     child: Text('Send'),
@@ -178,60 +172,9 @@ class _ImageViewState extends State<ImageView> {
             ),
           ),
           SliverFixedExtentList(
-            itemExtent: 200.0,
+            itemExtent: 400.0,
             delegate: SliverChildListDelegate(
               [detailsModal(context)],
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: Stack( // Stack is here because it's necessary to use Positioned()
-        children: [
-          Positioned( // Position button like
-            bottom: MediaQuery.of(context).size.height/100,
-            right: MediaQuery.of(context).size.width/150,
-            child: LikeButton(
-                size: buttonSize,
-                likeCount: likeCount,
-                key: _globalKey,
-                countBuilder: (int count, bool isLiked, String text) {
-                  final ColorSwatch<int> color =
-                  isLiked ? Colors.red : Colors.grey;
-                  Widget result;
-                  if (count == 0) {
-                    result = Text(
-                      'love',
-                      style: TextStyle(color: color),
-                    );
-                  } else
-                    result = Text(
-                      count >= 1000
-                          ? (count / 1000.0).toStringAsFixed(1) + 'k'
-                          : text,
-                      style: TextStyle(color: color),
-                    );
-                  return result;
-                },
-                likeCountAnimationType: likeCount < 1000
-                    ? LikeCountAnimationType.part
-                    : LikeCountAnimationType.none,
-                likeCountPadding: const EdgeInsets.only(left: 15.0),
-              ),
-          ),
-          Positioned(
-            top: MediaQuery.of(context).size.height/15,
-            right: MediaQuery.of(context).size.width/60,
-            child: TextButton(
-              style: ButtonStyle(
-                  foregroundColor:
-                  MaterialStateProperty.all<Color>(Colors.red[200])),
-              onPressed: () async {
-                await showInformationDialog(context);
-              },
-              child: Icon(
-                Icons.flag,
-                size: buttonSize,
-              ),
             ),
           ),
         ],
@@ -310,47 +253,98 @@ class _ImageViewState extends State<ImageView> {
     var response = await Dio()
         .get(widget.imgUrl, options: Options(responseType: ResponseType.bytes));
     final result =
-    await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
+        await ImageGallerySaver.saveImage(Uint8List.fromList(response.data));
     print(result);
     Navigator.pop(context);
   }
 
   Widget detailsModal(context) {
+    final int likeCount = 999;
+    final GlobalKey<LikeButtonState> _globalKey = GlobalKey<LikeButtonState>();
+    final double buttonSize = 40.0;
     return Container(
       color: Theme.of(context).dividerColor,
-      child: ListView(
-        padding: const EdgeInsets.only(left: 10),
-        children: <Widget>[
-          ListTile(
-            leading : Icon(
-              Icons.portrait,
-              size: smallbuttonSize,
-            ),
-            title :Text("John DOE",style: TextStyle(fontSize: 13)),
-          ),
-          ListTile(
-            leading : Icon(
-              Icons.file_download,
-              size: smallbuttonSize,
-            ),
-            title :Text("1452", style: TextStyle(fontSize: 13)),
-          ),
-          ListTile(
-            leading : Icon(
-              Icons.label,
-              size: smallbuttonSize,
-            ),
-            title : Wrap(
-              spacing: 6.0,
-              runSpacing: 6.0,
-              children: <Widget>[
-                _buildChip('Doge'),
-                _buildChip('To'),
-                _buildChip('The Moon'),
-              ],
-            ),
-          ),
-        ],
+      height: MediaQuery.of(context).size.height,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              Icon(
+                Icons.portrait,
+                size: buttonSize,
+              ),
+              Text("John DOE"),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              Icon(
+                Icons.file_download,
+                size: buttonSize,
+              ),
+              Text("1452"),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              Icon(
+                Icons.label,
+                size: buttonSize,
+              ),
+              Wrap(
+                spacing: 6.0,
+                runSpacing: 6.0,
+                children: <Widget>[
+                  _buildChip('Doge'),
+                  _buildChip('To'),
+                  _buildChip('The Moon'),
+                ],
+              ),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              TextButton(
+                style: ButtonStyle(
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.redAccent)),
+                onPressed: () async {
+                  await showInformationDialog(context);
+                },
+                child: Icon(
+                  Icons.flag,
+                  size: buttonSize,
+                ),
+              ),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              LikeButton(
+                size: buttonSize,
+                likeCount: likeCount,
+                key: _globalKey,
+                countBuilder: (int count, bool isLiked, String text) {
+                  final ColorSwatch<int> color =
+                      isLiked ? Colors.red : Colors.grey;
+                  Widget result;
+                  if (count == 0) {
+                    result = Text(
+                      'love',
+                      style: TextStyle(color: color),
+                    );
+                  } else
+                    result = Text(
+                      count >= 1000
+                          ? (count / 1000.0).toStringAsFixed(1) + 'k'
+                          : text,
+                      style: TextStyle(color: color),
+                    );
+                  return result;
+                },
+                likeCountAnimationType: likeCount < 1000
+                    ? LikeCountAnimationType.part
+                    : LikeCountAnimationType.none,
+                likeCountPadding: const EdgeInsets.only(left: 15.0),
+              ),
+            ]),
+          ],
+        ),
       ),
     );
   }
@@ -362,7 +356,7 @@ Widget _buildChip(String label) {
     label: Text(
       label,
       style: TextStyle(
-        color: Colors.white, fontSize: 13
+        color: Colors.white,
       ),
     ),
     backgroundColor: Color(0xff848989),
