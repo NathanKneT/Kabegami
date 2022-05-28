@@ -25,6 +25,5 @@ flutter pub get
 ```
 ## Screenshot of the app
 
-https://i.ibb.co/t2kdh86/kabegami.png
-
-https://i.ibb.co/84wdQ44/kabegami2.png
+![screenshot](https://i.ibb.co/t2kdh86/kabegami.png)
+![screenshot](https://i.ibb.co/84wdQ44/kabegami2.png)
