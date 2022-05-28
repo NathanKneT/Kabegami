@@ -23,3 +23,8 @@ Go to project root and execute the following command in console to get the requi
 ```
 flutter pub get 
 ```
+## Screenshot of the app
+
+https://i.ibb.co/t2kdh86/kabegami.png
+
+https://i.ibb.co/84wdQ44/kabegami2.png
